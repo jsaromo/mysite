@@ -1,0 +1,31 @@
+<html>
+
+    <head>
+        <title> Class Schedule </title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    </head>
+
+    <h1> Class Schedule </h1>
+
+    <body>
+        <div class= 'container'>
+
+            <table>
+
+                {% for course in courses %}
+                <tr>
+                    <td>{{ course.period }}</td>
+                    <td>{{ course.name }}</td>
+                    <td>{{ course.teacher_name }}</td>
+                    <td><a href="{{ course.resource_url }}">{{ course.resource_name }}</a></td>
+                </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    </body>
+
+<p><a href = 'http://jonathansaromo.pythonanywhere.com'> Return to the main page </a></p>
+<p><a href = 'http://jonathansaromo.pythonanywhere.com/about_me'> About me </a></p>
+
+</html>

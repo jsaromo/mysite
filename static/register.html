@@ -2,47 +2,50 @@
 
     <head>
         <title> Register </title>
-        <link rel = 'stylesheet' type = 'text/css' href = 'static/css/style.css'>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     </head>
 
     <h2> Register </h2>
 
-    <form>
+    <body>
+        <div class='container'>
+            <form>
 
-        First Name: <input type = 'text' name = 'firstname'>
-        <br>
-        Last Name: <input type = 'text' name = 'lastname'>
+                First Name: <input type = 'text' name = 'firstname'>
+                <br>
+                Last Name: <input type = 'text' name = 'lastname'>
 
-        <br><br>
+                <br><br>
 
-        Email: <input type = 'email' name = 'email'>
-        <br>
-        Password: <input type = 'password' name = 'password'>
+                Email: <input type = 'email' name = 'email'>
+                <br>
+                Password: <input type = 'password' name = 'password'>
 
-        <br><br>
+                <br><br>
 
-        Grade:
-        <select>
-            <option value = 'freshman'> Freshman </option>
-            <option value = 'sophomore'> Sophomore </option>
-            <option value = 'junior'> Junior </option>
-            <option value = 'senior'> Senior </option>
-        </select>
+                Grade:
+                <select>
+                    <option value = 'freshman'> Freshman </option>
+                    <option value = 'sophomore'> Sophomore </option>
+                    <option value = 'junior'> Junior </option>
+                    <option value = 'senior'> Senior </option>
+                </select>
 
-        <br><br>
+                <br><br>
 
-        <input type = 'radio' name = 'gender' value = 'male'> Male <br>
-        <input type = 'radio' name = 'gender' value = 'female'> Female <br>
-        <input type = 'radio' name = 'gender' value = 'other'> Other <br>
+                <input type = 'radio' name = 'gender' value = 'male'> Male <br>
+                <input type = 'radio' name = 'gender' value = 'female'> Female <br>
+                <input type = 'radio' name = 'gender' value = 'other'> Other <br>
 
-        <br>
+                <br>
 
-        <input type = 'checkbox' name = 'receive_email' value = 'yes'> I would like to receive emails.
+                <input type = 'checkbox' name = 'receive_email' value = 'yes'> I would like to receive emails.
 
-        <br><br>
+                <br><br>
 
-        <input type = 'submit' value = 'Submit'> <input type = 'reset' value = 'Reset'>
+                <input type = 'submit' value = 'Submit'> <input type = 'reset' value = 'Reset'>
 
-    </form>
-
+            </form>
+        </div>
+    </body>
 </html>
