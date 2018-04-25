@@ -1,46 +1,24 @@
-<html>
-
-    <head>
-        <title> Class Schedule </title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-    </head>
-
-    <h1> Class Schedule </h1>
-
-<<<<<<< HEAD
-    <body>
-        <div class= 'container'>
-
-            <table>
-
-                {% for course in courses %}
-                <tr>
-                    <td>{{ course.period }}</td>
-                    <td>{{ course.name }}</td>
-                    <td>{{ course.teacher_name }}</td>
-                    <td><a href="{{ course.resource_url }}">{{ course.resource_name }}</a></td>
-                </tr>
-                {% endfor %}
-
-            </table>
-        </div>
-    </body>
-=======
-    <table class="table table-striped table-bordered">
-
-        {% for course in courses %}
-        <tr>
-            <td>{{ course.period }}</td>
-            <td>{{ course.name }}</td>
-            <td>{{ course.teacher_name }}</td>
-            <td><a href="{{ course.resource_url }}">{{ course.resource_name }}</a></td>
-        </tr>
-        {% endfor %}
-
-    </table>
->>>>>>> 131efc10d15ea0408bc27f07b0b7bb8088f0e80a
+{% extends "base.html" %}
+{% block title %}My Class Schedule{% endblock %}
+{% block content %}
+<h2>My Class Schedule</h2>
+<table>
+  <tr>
+    <th>Period</th>
+    <th>Class</th>
+    <th>Teacher</th>
+    <th>Website</th>
+  </tr>
+  {% for course in courses %}
+  <tr>
+    <td>{{ course.period }}</td>
+    <td>{{ course.name }}</td>
+    <td>{{ course.teacher_name }}</td>
+    <td><a href="{{ course.resource_url }}">{{ course.resource_name }}</a></td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}
 
 <p><a href = 'http://jonathansaromo.pythonanywhere.com'> Return to the main page </a></p>
 <p><a href = 'http://jonathansaromo.pythonanywhere.com/about_me'> About me </a></p>
-
-</html>
