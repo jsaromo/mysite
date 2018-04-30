@@ -12,7 +12,12 @@
   <tr>
     <td>{{ song.title }}</td>
     <td>{{ song.artist_name }}</td>
-    <td><a href= "{{ song.youtube_url }}">{{ song.youtube_url }}</a></td>
+
+    <td>
+        <iframe width="320" height="180"
+        src="{{ song.youtube_url }}">
+        </iframe>
+    </td>
   </tr>
   {% endfor %}
 </table>
