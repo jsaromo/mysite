@@ -6,12 +6,14 @@
     <tr>
     <th>Title</th>
     <th>Artist</th>
+    <th>Artist Picture</th>
     <th>YouTube URL</th>
   </tr>
   {% for song in songs %}
   <tr>
     <td>{{ song.title }}</td>
     <td>{{ song.artist_name }}</td>
+    <td><img src = 'static/images/{{ song.artist_picture }}'></td>
 
     <td>
         <iframe width="320" height="180"
