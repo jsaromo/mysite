@@ -1,14 +1,13 @@
-# A very simple Flask Hello World app for you to get started with...
-
-import constants
-
 from flask import Flask
 from flask import render_template
+from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config.from_object('config.BaseConfig')
 db = SQLAlchemy(app)
+
+Bootstrap(app)
 
 class Course(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -47,7 +46,7 @@ def register():
 def top_ten_songs():
     songs = Song.query.all()
     return render_template('top_ten_songs.html',
-                            songs=constants.TOP_TEN_SONGS)
+                            songs=songs)
 
 if __name__ == '__main__':
   db.create_all()
