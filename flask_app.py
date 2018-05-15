@@ -14,11 +14,14 @@ from werkzeug.security import generate_password_hash
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Email, Length
 from wtforms.validators import ValidationError
+from flask_login import LoginManager, UserMixin, current_user, login_user, logout_user
 
 app = Flask(__name__)
 app.config.from_object('config.BaseConfig')
 
 db = SQLAlchemy(app)
+
+login = LoginManager(app)
 
 Bootstrap(app)
 
@@ -30,6 +33,7 @@ SSLify(app)
 def create_navbar():
     home_view = View('Home', 'homepage')
     login_view = View('Login', 'login')
+    logout_view = View('Logout', 'logout')
     register_view = View('Register', 'register')
     about_me_view = View('About Me', 'about_me')
     class_schedule_view = View('Class Schedule', 'class_schedule')
@@ -38,7 +42,10 @@ def create_navbar():
                              about_me_view,
                              class_schedule_view,
                              top_ten_songs_view)
-    return Navbar('MySite', home_view, misc_subgroup, login_view, register_view)
+    if current_user.is_authenticated:
+        return Navbar('MySite', home_view, misc_subgroup, logout_view)
+    else:
+        return Navbar('MySite', home_view, misc_subgroup, login_view, register_view)
 
 class Course(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -72,17 +79,22 @@ class Song(db.Model):
     artist_name = db.Column(db.String(80))
     youtube_url = db.Column(db.String(300))
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(15))
     email = db.Column(db.String(150))
     password_hash = db.Column(db.String(128))
+
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+
+    @login.user_loader
+    def load_user(user_id):
+        return User.query.filter_by(id=int(user_id)).first()
 
 @app.route('/')
 def homepage():
@@ -109,6 +121,7 @@ def register():
         new_user.set_password(form.password.data)
         db.session.add(new_user)
         db.session.commit()
+        login_user(new_user)
         return redirect(url_for('homepage'))
     return render_template('register.html', form=form)
 
@@ -120,14 +133,22 @@ def top_ten_songs():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('homepage'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if not user or not user.check_password(form.password.data):
             flash('Username or password is incorrect.', 'danger')
             return render_template('login.html', form=form)
-        return 'Welcome ' + user.username + '!'
+        login_user(user)
+        return redirect(url_for('homepage'))
     return render_template('login.html', form=form)
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('homepage'))
 
 if __name__ == '__main__':
   db.create_all()
