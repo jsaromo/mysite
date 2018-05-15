@@ -1,9 +1,9 @@
 from flask import Flask
 from flask import render_template
 from flask_bootstrap import Bootstrap
-from flask_sqlalchemy import SQLAlchemy
 from flask_nav import Nav
 from flask_nav.elements import Navbar, Subgroup, View
+from flask_sqlalchemy import SQLAlchemy
 from flask_sslify import SSLify
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
@@ -11,13 +11,15 @@ from wtforms.validators import InputRequired, Email, Length
 
 app = Flask(__name__)
 app.config.from_object('config.BaseConfig')
+
 db = SQLAlchemy(app)
 
 Bootstrap(app)
 
+nav = Nav(app)
+
 SSLify(app)
 
-nav = Nav(app)
 @nav.navigation('mysite_navbar')
 def create_navbar():
     home_view = View('Home', 'homepage')
