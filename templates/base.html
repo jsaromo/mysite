@@ -2,3 +2,8 @@
 {% block navbar %}
 {{ nav.mysite_navbar.render() }}
 {% endblock %}
+
+{% block styles %}
+<link rel = "stylesheet"
+      href = "{{ url_for('static', filename = 'css/theme.css')}}">
+{% endblock %}
