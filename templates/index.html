@@ -9,7 +9,17 @@
 {% endif %}
 <h3>Recent posts from users</h3>
 {% for post in posts %}
-<p>{{ post.body }}</p>
+<div class='container'>
+<table class='table'>
+    <tr>
+        <td> {{ post.body }} </td>
+        <td> {{ post.author.username }} </td>
+        <td> {{ post.timestamp.strftime('%-I:%M %p') }} </td>
+        <td> {{ post.timestamp.strftime('%-m/%-d/%y') }} </td>
+    </tr>
 {% endfor %}
+</table>
 </div>
 {% endblock %}
+
+

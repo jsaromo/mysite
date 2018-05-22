@@ -19,7 +19,7 @@ from wtforms.validators import ValidationError
 
 app = Flask(__name__)
 app.config.from_object('config.BaseConfig')
-
+app.config['SQLALCHEMY_DATABASE_URL'] = 'sqlite:///relationship.db'
 db = SQLAlchemy(app)
 
 login = LoginManager(app)
@@ -96,7 +96,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(15))
     email = db.Column(db.String(150))
     password_hash = db.Column(db.String(128))
-
+    posts = db.relationship('Post', backref = 'author')
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
