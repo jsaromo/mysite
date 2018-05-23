@@ -8,9 +8,9 @@
 <p>Welcome to MySite!</p>
 {% endif %}
 <h3>Recent posts from users</h3>
-{% for post in posts %}
 <div class='container'>
-<table class='table'>
+<table class="table">
+    {% for post in posts %}
     <tr>
         <td> {{ post.body }} </td>
         <td> {{ post.author.username }} </td>

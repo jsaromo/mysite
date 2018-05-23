@@ -40,10 +40,12 @@ def create_navbar():
     about_me_view = View('About Me', 'about_me')
     class_schedule_view = View('Class Schedule', 'class_schedule')
     top_ten_songs_view = View('Top Ten Songs', 'top_ten_songs')
+    snap_project_view = View('Snap Project', 'snap_project')
     misc_subgroup = Subgroup('Misc',
                              about_me_view,
                              class_schedule_view,
-                             top_ten_songs_view)
+                             top_ten_songs_view,
+                             snap_project_view)
     if current_user.is_authenticated:
         return Navbar('MySite', home_view, posts_view, misc_subgroup, logout_view)
     else:
@@ -175,6 +177,10 @@ def posts():
         db.session.commit()
         posts.append(new_post)
     return render_template('posts.html', form=form, posts=posts)
+
+@app.route('/snap_project')
+def snap_project():
+    return render_template('snap_project.html')
 
 if __name__ == '__main__':
   db.create_all()
